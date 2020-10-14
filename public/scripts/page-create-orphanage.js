@@ -61,3 +61,19 @@ function removePhoto(event) {
     event.currentTarget.parentElement.children[0].value = "";
   }
 }
+
+// select sim e não
+function toggleSelect(event) {
+  // retirar a classe active
+  document
+    .querySelectorAll(".button-select button")
+    .forEach((button) => button.classList.remove("active"));
+  //adicionar a classe active
+  const button = event.currentTarget;
+  button.classList.add("active");
+  // atualizar o meu input hidden com o valor selecionado
+  const input = document.querySelector("[name='open_on_weekends']");
+  console.log(input);
+  // verificar se é sim ou não
+  input.value = button.dataset.value; // data-value attribute
+}

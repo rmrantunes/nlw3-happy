@@ -123,17 +123,31 @@
             </div>
 
             <div class="input-block">
-              <label for="onpen_on_weekends">Atende fim de semana?</label>
+              <label for="open_on_weekends">Atende fim de semana?</label>
               <input
                 type="hidden"
-                name="onpen_on_weekends"
-                id="onpen_on_weekends"
+                name="open_on_weekends"
+                id="open_on_weekends"
                 value="1"
                 required
               />
               <div class="button-select">
-                <button type="button" class="active">Sim</button>
-                <button type="button">Não</button>
+                <button
+                  data-value="1"
+                  onclick="toggleSelect(event)"
+                  type="button"
+                  class="active"
+                >
+                  Sim
+                </button>
+                <!-- Element.dataset.value -->
+                <button
+                  data-value="0"
+                  onclick="toggleSelect(event)"
+                  type="button"
+                >
+                  Não
+                </button>
               </div>
               <button type="submit" class="primary-button">Confirmar</button>
             </div>
@@ -141,6 +155,6 @@
         </form>
       </main>
     </div>
-    <script src="./public/scripts/page-create-orphanage.js"></script>
+    <script src="./public/scripts/my-page-create-orphanage.js"></script>
   </body>
 </html>

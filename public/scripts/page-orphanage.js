@@ -24,8 +24,8 @@ const icon = L.icon({
 // Create and add marker
 L.marker([-27.2269864, -49.6468318], { icon }).addTo(map);
 
-// image gallery
 
+// image gallery
 function selectImage(event) {
   const button = event.currentTarget;
   // remover todas as classes
