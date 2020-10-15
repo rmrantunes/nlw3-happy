@@ -43,6 +43,12 @@
   color: #37c77f;
 }
 
+.button-select button.no.active {
+  background: #FFFCFD;
+  border: 1px solid #FFBCD4;
+  color: #FF669D;
+}
+
 .button-select button:first-child {
   border-radius: 2rem 0 0 2rem;
 }

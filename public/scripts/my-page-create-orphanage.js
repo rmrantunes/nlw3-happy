@@ -1,5 +1,5 @@
 // Create map
-const map = L.map("mapid").setView([-27.2269864, -49.6468318], 15);
+const map = L.map("mapid").setView([-10.8860622, -61.9358017], 15);
 
 // Create title layer
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
@@ -29,28 +29,24 @@ map.on("click", (event) => {
   marker = L.marker([lat, lng], { icon }).addTo(map);
 });
 
-// quase da mesma forma que o addEventListener que tem o event com aquelas propriedades do browser;
-// esse on() tem as propriedades do mapa no seu event.
-
-// adicionar campo de fotos
 function addPhotoField() {
-  //pegar o container de fotos #images
-  const container = document.querySelector("#images");
+  // Seleção dos inputs
   const inputs = Array.from(document.querySelectorAll(".new-upload input"));
-  const isNotEmpty = inputs.every((item) => item.value !== "");
+
+  // Trocando a cor da borda se for vazio, como erro
   inputs.forEach((item) => (item.style.borderColor = "#a1e9c5"));
   inputs
     .filter((item) => item.value == "")
     .forEach((item) => (item.style.borderColor = "#FF669D"));
+
+  // Verificando se todos estão preenchidos
+  // Para então ser executado o clone
+  const isNotEmpty = inputs.every((item) => item.value !== "");
   if (isNotEmpty) {
-    //duplicar o newUpload
     const fieldContainer = document.querySelector(".new-upload");
-    // realizar o clone
     const newFieldContainer = fieldContainer.cloneNode(true);
-    //limpar valor
     newFieldContainer.querySelector("input").value = "";
-    //adicionar o clone no container de imagens
-    container.appendChild(newFieldContainer);
+    document.querySelector("#images").appendChild(newFieldContainer);
   }
 }
 
