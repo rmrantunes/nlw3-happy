@@ -34,19 +34,27 @@ function addPhotoField() {
   const inputs = Array.from(document.querySelectorAll(".new-upload input"));
 
   // Trocando a cor da borda se for vazio, como erro
-  inputs.forEach((item) => (item.style.borderColor = "#a1e9c5"));
-  inputs
-    .filter((item) => item.value == "")
-    .forEach((item) => (item.style.borderColor = "#FF669D"));
+  emptyError();
 
   // Verificando se todos estão preenchidos
   // Para então ser executado o clone
-  const isNotEmpty = inputs.every((item) => item.value !== "");
-  if (isNotEmpty) {
-    const fieldContainer = document.querySelector(".new-upload");
-    const newFieldContainer = fieldContainer.cloneNode(true);
-    newFieldContainer.querySelector("input").value = "";
-    document.querySelector("#images").appendChild(newFieldContainer);
+  addField();
+
+  function addField() {
+    const isNotEmpty = inputs.every((item) => item.value !== "");
+    if (isNotEmpty) {
+      const fieldContainer = document.querySelector(".new-upload");
+      const newFieldContainer = fieldContainer.cloneNode(true);
+      newFieldContainer.querySelector("input").value = "";
+      document.querySelector("#images").appendChild(newFieldContainer);
+    }
+  }
+
+  function emptyError() {
+    inputs.forEach((item) => (item.style.borderColor = "#a1e9c5"));
+    inputs
+      .filter((item) => item.value == "")
+      .forEach((item) => (item.style.borderColor = "#FF669D"));
   }
 }
 
