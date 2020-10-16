@@ -1,10 +1,9 @@
 // vai conter o
 const Database = require("sqlite-async");
 
-Database.open(__dirname + "/database.sqlite").then(execute);
 // criar um arquivo sqlite
 function execute(db) {
-  db.exec(`
+  return db.exec(`
     CREATE TABLE IF NOT EXISTS orphanages (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       lat TEXT,
@@ -19,3 +18,5 @@ function execute(db) {
     );
   `);
 }
+
+module.exports = Database.open(__dirname + "/database.sqlite").then(execute);
