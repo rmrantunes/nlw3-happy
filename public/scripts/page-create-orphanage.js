@@ -77,3 +77,14 @@ function toggleSelect(event) {
   // verificar se é sim ou não
   input.value = button.dataset.value; // data-value attribute
 }
+
+function validate(event) {
+  // validar se lat e lng esão preenchidos
+  const needsCoords =
+    document.querySelector('[name="lat"]').value == "" &&
+    document.querySelector('[name="lng"]').value == "";
+  if (needsCoords) {
+    event.preventDefault();
+    alert("Selecione um ponto no mapa");
+  }
+}
