@@ -7,6 +7,8 @@ const server = express(); // o retorno da função é um objeto, com get, listen
 // criar uma rota
 // "/" = index.html
 server
+  // utilisar body do req
+  .use(express.urlencoded({ extended: true }))
   .use(express.static("public")) // faz com que as pasta estatica "public" funcione
   // configurar template engine Handlebars.js
   // todos os arquivos que forem .html devem ser trocados por .hbs
@@ -18,7 +20,8 @@ server
   .get("/", pages.index)
   .get("/orphanage", pages.orphanage)
   .get("/orphanages", pages.orphanages)
-  .get("/create-orphanage", pages.createOrphanage);
+  .get("/create-orphanage", pages.createOrphanage)
+  .post("/save-orphanage", pages.saveOrphanage);
 
 // ligar o servidor
 server.listen(5500);
