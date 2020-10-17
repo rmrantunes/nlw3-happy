@@ -14,7 +14,7 @@ function saveOrphanage(db, orphanage) {
     "${orphanage.lat}",
     "${orphanage.lng}",
     "${orphanage.name}",
-    "${orphanage.description}",
+    "${orphanage.about}",
     "${orphanage.whatsapp}",
     "${orphanage.images}",
     "${orphanage.instructions}",
