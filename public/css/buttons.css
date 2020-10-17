@@ -13,6 +13,8 @@
   justify-content: center;
 
   transition: 0.2s;
+
+  text-decoration: none;
 }
 
 .primary-button:hover {
@@ -44,9 +46,9 @@
 }
 
 .button-select button.no.active {
-  background: #FFFCFD;
-  border: 1px solid #FFBCD4;
-  color: #FF669D;
+  background: #fffcfd;
+  border: 1px solid #ffbcd4;
+  color: #ff669d;
 }
 
 .button-select button:first-child {
