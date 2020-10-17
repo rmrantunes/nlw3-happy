@@ -1,3 +1,5 @@
+const getLocation = require("./getLocation");
+console.log(getLocation);
 // Create map
 const map = L.map("mapid").setView([-27.2269864, -49.6468318], 15);
 
