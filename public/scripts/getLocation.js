@@ -1,26 +1,27 @@
-// const userIP = getIP();
-// console.log(userIP);
+import pageOrphanage from "./page-orphanages.js";
 
-// function getIP() {
-//   return document.querySelector("#user-ip").dataset.ip;
-// }
-// navigator.geolocation.getCurrentPosition(getLocation);
-// function getLocation(position) {
-//   document.querySelector("span[data-maplat]").dataset.maplat =
-//     position.coords.latitude;
-//   document.querySelector("span[data-maplng]").dataset.maplng =
-//     position.coords.longitude;
-// }
+async function getIP() {
+  const userIP = await (
+    await fetch("https://api.ipify.org/?format=json")
+  ).json();
+  getLocation(userIP);
+}
 
-const mapSpan = document.querySelector("[data-js='map']");
-const data = [];
-fetch("http://ip-api.com/json/177.203.188.177?lang=pt-BR")
-  .then(function (response) {
-    response.json().then(({ regionName, city, lat, lon }) => {
-      data.push(lat, lon, city, regionName);
-    });
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-// const coords = getLocation();
+async function getLocation({ ip }) {
+  const locationResponse = await fetch(
+    `http://ip-api.com/json/${ip}?lang=pt-BR`,
+  );
+  const userLocation = await locationResponse.json();
+  renderCityAndState(userLocation);
+}
+
+function renderCityAndState({ regionName, city, lat, lon }) {
+  const mapState = document.querySelector('[data-map="state"]');
+  const mapCity = document.querySelector('[data-map="city"]');
+
+  mapState.innerText = regionName;
+  mapCity.innerText = city;
+  pageOrphanage(lat, lon);
+}
+
+getIP();
