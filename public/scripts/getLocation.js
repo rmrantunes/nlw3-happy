@@ -1,11 +1,13 @@
 import pageOrphanage from "./page-orphanages.js";
 
-const mapState = document.querySelector('[data-map="state"]');
-const mapCity = document.querySelector('[data-map="city"]');
+const locationSpans = {
+  mapState: document.querySelector('[data-map="state"]'),
+  mapCity: document.querySelector('[data-map="city"]'),
+};
 
 function renderCityAndState({ regionName, city, lat, lon }) {
-  mapState.innerText = regionName;
-  mapCity.innerText = city;
+  locationSpans.mapState.innerText = regionName;
+  locationSpans.mapCity.innerText = city;
   pageOrphanage(lat, lon);
 }
 
@@ -30,7 +32,6 @@ getLocationByIP();
 const searchLocation = {
   form: document.querySelector('[data-search="form"]'),
   input: document.querySelector('[data-search="input"]'),
-  map: document.querySelector("#mapid"),
 };
 searchLocation.form.addEventListener("submit", handleSearch);
 
@@ -53,9 +54,10 @@ async function reverseGeolocation(search) {
       lat: reverseData[0].lat,
       lon: reverseData[0].lon,
     };
-    searchLocation.map.outerHTML = `<div id="mapid" class="animate-appear"></div>`;
+    const map = document.querySelector("#mapid");
+    map.outerHTML = `<div id="mapid" class="animate-appear"></div>`;
     renderCityAndState(location);
   } catch (error) {
-    console.log(error);
+    console.log(Error(error));
   }
 }
