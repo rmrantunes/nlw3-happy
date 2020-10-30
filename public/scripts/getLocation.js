@@ -24,12 +24,13 @@ async function getLocation({ ip }) {
   renderCityAndState(userLocation);
 }
 
-// getLocationByIP();
+getLocationByIP();
 
 // Search location
 const searchLocation = {
   form: document.querySelector('[data-search="form"]'),
   input: document.querySelector('[data-search="input"]'),
+  map: document.querySelector("#mapid"),
 };
 searchLocation.form.addEventListener("submit", handleSearch);
 
@@ -52,6 +53,7 @@ async function reverseGeolocation(search) {
       lat: reverseData[0].lat,
       lon: reverseData[0].lon,
     };
+    searchLocation.map.outerHTML = `<div id="mapid" class="animate-appear"></div>`;
     renderCityAndState(location);
   } catch (error) {
     console.log(error);
