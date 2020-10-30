@@ -1,6 +1,15 @@
 import pageOrphanage from "./page-orphanages.js";
 
-async function getIP() {
+const mapState = document.querySelector('[data-map="state"]');
+const mapCity = document.querySelector('[data-map="city"]');
+
+function renderCityAndState({ regionName, city, lat, lon }) {
+  mapState.innerText = regionName;
+  mapCity.innerText = city;
+  pageOrphanage(lat, lon);
+}
+
+async function getLocationByIP() {
   const userIP = await (
     await fetch("https://api.ipify.org/?format=json")
   ).json();
@@ -15,13 +24,36 @@ async function getLocation({ ip }) {
   renderCityAndState(userLocation);
 }
 
-function renderCityAndState({ regionName, city, lat, lon }) {
-  const mapState = document.querySelector('[data-map="state"]');
-  const mapCity = document.querySelector('[data-map="city"]');
+// getLocationByIP();
 
-  mapState.innerText = regionName;
-  mapCity.innerText = city;
-  pageOrphanage(lat, lon);
+// Search location
+const searchLocation = {
+  form: document.querySelector('[data-search="form"]'),
+  input: document.querySelector('[data-search="input"]'),
+};
+searchLocation.form.addEventListener("submit", handleSearch);
+
+function handleSearch(event) {
+  event.preventDefault();
+  reverseGeolocation(searchLocation.input.value);
 }
 
-getIP();
+async function reverseGeolocation(search) {
+  try {
+    const reverseData = await (
+      await fetch(
+        `https://us1.locationiq.com/v1/search.php?key=pk.91202ec0256ea7be1056319fce904a8b&q=${search}&format=json`,
+      )
+    ).json();
+    const cityAndState = reverseData[0].display_name.split(", ");
+    const location = {
+      regionName: cityAndState[3],
+      city: cityAndState[0],
+      lat: reverseData[0].lat,
+      lon: reverseData[0].lon,
+    };
+    renderCityAndState(location);
+  } catch (error) {
+    console.log(error);
+  }
+}
